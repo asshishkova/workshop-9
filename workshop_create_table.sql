@@ -1,3 +1,6 @@
+CREATE DATABASE workshop8;
+
+USE workshop8;
 
 create table player
 (
