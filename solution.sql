@@ -13,11 +13,18 @@
 -- #5 Name all players who are attackers and didn’t score any goal (using left join)
 -- select distinct player_name, position, goalscore.goal_id from player left join goalscore using (player_id) where player.position = "Attacker";
 -- select distinct player_name, position, goalscore.goal_id from player left join goalscore using (player_id) where player.position = "Forward";
-select distinct player_name, position, goalscore.goal_id from player left join goalscore using (player_id) where player.position = "Forward" and goalscore.goal_id is null;
-
--- select * from player where position = "Attacker";
+-- select distinct player_name, position, goalscore.goal_id from player left join goalscore using (player_id) where player.position = "Forward" and goalscore.goal_id is null;
 
 -- #6 Use explain to get information about the last query (screenshot your results)
+-- explain select distinct player_name, position, goalscore.goal_id from player left join goalscore using (player_id) where player.position = "Forward" and goalscore.goal_id is null;
+
 -- #7 Add index to players table on position column
--- #8 Run explain again - what are the differences? meanings?
+-- alter table player
+-- add index position_index (position);
+-- describe player;
+
+#8 Run explain again - what are the differences? meanings?
+-- explain select distinct player_name, position, goalscore.goal_id from player left join goalscore using (player_id) where player.position = "Forward" and goalscore.goal_id is null;
+
+
 -- #9 Using transaction, write a query to get the youngest manager and move him to a new club
