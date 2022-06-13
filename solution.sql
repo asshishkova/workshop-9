@@ -23,8 +23,18 @@
 -- add index position_index (position);
 -- describe player;
 
-#8 Run explain again - what are the differences? meanings?
+-- #8 Run explain again - what are the differences? meanings?
 -- explain select distinct player_name, position, goalscore.goal_id from player left join goalscore using (player_id) where player.position = "Forward" and goalscore.goal_id is null;
 
-
 -- #9 Using transaction, write a query to get the youngest manager and move him to a new club
+
+START TRANSACTION;
+	insert into club (club_id, club_name, home_stadium, league, country) VALUES
+		(59,'NewClub','NewStadium','NewLeague','NewCountry');
+	update playerclub
+		set club_id = 59 
+		where player_id = (select player_id from player ORDER BY age ASC LIMIT 1);
+COMMIT;
+
+-- select * from player join playerclub using (player_id) join club using (club_id)
+-- where player_id = (select player_id from player ORDER BY age ASC LIMIT 1);
